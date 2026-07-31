@@ -1,0 +1,746 @@
+<style>
+  :root {
+    --bg: #fbf7f0;
+    --bg-alt: #f3ece0;
+    --ink: #1b1a17;
+    --ink-soft: #55504a;
+    --line: #ddd2c0;
+    --accent: #b4442c;
+    --accent-2: #c98a1a;
+    --paper: #fffdf8;
+    --stamp: #8d2b1c;
+    --warn-bg: #fff3cd;
+    --warn-ink: #6b4c00;
+    --warn-line: #e3c25a;
+  }
+  :root[data-theme="dark"] {
+    --bg: #14130f;
+    --bg-alt: #1c1a15;
+    --ink: #f2ece1;
+    --ink-soft: #b0a696;
+    --line: #38332a;
+    --accent: #e8734f;
+    --accent-2: #e0b martial;
+    --accent-2: #e0b04a;
+    --paper: #1f1c16;
+    --stamp: #e8734f;
+    --warn-bg: #2c2410;
+    --warn-ink: #f2d585;
+    --warn-line: #6b5620;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #14130f;
+      --bg-alt: #1c1a15;
+      --ink: #f2ece1;
+      --ink-soft: #b0a696;
+      --line: #38332a;
+      --accent: #e8734f;
+      --accent-2: #e0b04a;
+      --paper: #1f1c16;
+      --stamp: #e8734f;
+      --warn-bg: #2c2410;
+      --warn-ink: #f2d585;
+      --warn-line: #6b5620;
+    }
+    :root[data-theme="light"] {
+      --bg: #fbf7f0;
+      --bg-alt: #f3ece0;
+      --ink: #1b1a17;
+      --ink-soft: #55504a;
+      --line: #ddd2c0;
+      --accent: #b4442c;
+      --accent-2: #c98a1a;
+      --paper: #fffdf8;
+      --stamp: #8d2b1c;
+      --warn-bg: #fff3cd;
+      --warn-ink: #6b4c00;
+      --warn-line: #e3c25a;
+    }
+  }
+
+  * { box-sizing: border-box; }
+
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--ink);
+    font-family: Georgia, "Iowan Old Style", "Times New Roman", serif;
+    font-size: 18px;
+    line-height: 1.65;
+    overflow-x: hidden;
+  }
+
+  .wrap { max-width: 760px; margin: 0 auto; padding: 0 20px; }
+
+  /* ---------- satire banner ---------- */
+  .banner {
+    background: var(--warn-bg);
+    color: var(--warn-ink);
+    border-bottom: 2px solid var(--warn-line);
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+    font-size: 15px;
+    line-height: 1.5;
+    padding: 14px 20px;
+    text-align: center;
+    position: sticky;
+    top: 0;
+    z-index: 50;
+  }
+  .banner strong { letter-spacing: .04em; }
+
+  /* ---------- hero ---------- */
+  header.hero {
+    padding: 64px 0 48px;
+    border-bottom: 1px solid var(--line);
+    background:
+      radial-gradient(1200px 400px at 50% -160px, color-mix(in srgb, var(--accent) 14%, transparent), transparent),
+      var(--bg);
+    text-align: center;
+  }
+  .kicker {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+    text-transform: uppercase;
+    letter-spacing: .18em;
+    font-size: 12px;
+    color: var(--accent);
+    margin: 0 0 18px;
+  }
+  h1 {
+    font-size: clamp(2.1rem, 7vw, 3.6rem);
+    line-height: 1.08;
+    margin: 0 0 20px;
+    letter-spacing: -.02em;
+  }
+  h1 em { color: var(--accent); font-style: italic; }
+  .dek {
+    font-size: clamp(1.05rem, 2.5vw, 1.3rem);
+    color: var(--ink-soft);
+    max-width: 34em;
+    margin: 0 auto;
+  }
+  .byline {
+    margin-top: 28px;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+    font-size: 13px;
+    color: var(--ink-soft);
+  }
+
+  /* ---------- sections ---------- */
+  section { padding: 48px 0; border-bottom: 1px solid var(--line); }
+  section:last-of-type { border-bottom: none; }
+  h2 {
+    font-size: clamp(1.5rem, 4vw, 2rem);
+    line-height: 1.2;
+    margin: 0 0 6px;
+    letter-spacing: -.01em;
+  }
+  h2 .num {
+    display: block;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+    font-size: 12px;
+    letter-spacing: .18em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 10px;
+  }
+  h3 { font-size: 1.15rem; margin: 32px 0 8px; }
+  p { margin: 0 0 18px; }
+  a { color: var(--accent); }
+
+  ul, ol { margin: 0 0 18px; padding-left: 1.4em; }
+  li { margin-bottom: 10px; }
+
+  /* ---------- pull quote ---------- */
+  blockquote {
+    margin: 28px 0;
+    padding: 4px 0 4px 22px;
+    border-left: 3px solid var(--accent);
+    font-size: 1.2rem;
+    font-style: italic;
+    color: var(--ink);
+  }
+  blockquote footer {
+    margin-top: 10px;
+    font-size: .8rem;
+    font-style: normal;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+    color: var(--ink-soft);
+  }
+
+  /* ---------- "document" cards ---------- */
+  .doc {
+    background: var(--paper);
+    border: 1px solid var(--line);
+    border-radius: 4px;
+    padding: 26px 24px;
+    margin: 28px 0;
+    box-shadow: 0 1px 0 var(--line), 0 12px 28px -22px rgba(0,0,0,.5);
+    position: relative;
+    overflow: hidden;
+  }
+  .doc::after {
+    content: "ЭТО НЕ ДОКУМЕНТ";
+    position: absolute;
+    top: 18px; right: -46px;
+    transform: rotate(34deg);
+    background: var(--stamp);
+    color: #fff;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: .1em;
+    padding: 5px 54px;
+    opacity: .92;
+  }
+  .doc-head {
+    font-family: "Courier New", Courier, monospace;
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: .1em;
+    color: var(--ink-soft);
+    border-bottom: 1px dashed var(--line);
+    padding-bottom: 10px;
+    margin-bottom: 16px;
+    padding-right: 90px;
+  }
+  .doc-body { font-family: "Courier New", Courier, monospace; font-size: 15px; line-height: 1.7; }
+  .doc-body p { margin-bottom: 12px; }
+  .doc-sig {
+    margin-top: 18px;
+    padding-top: 12px;
+    border-top: 1px dashed var(--line);
+    font-family: "Courier New", Courier, monospace;
+    font-size: 13px;
+    color: var(--ink-soft);
+  }
+
+  /* ---------- footnote refs ---------- */
+  sup a {
+    text-decoration: none;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+    font-size: 11px;
+    padding: 1px 4px;
+    border-radius: 3px;
+    background: color-mix(in srgb, var(--accent) 16%, transparent);
+  }
+
+  /* ---------- table ---------- */
+  .scroll { overflow-x: auto; margin: 24px 0; }
+  table { border-collapse: collapse; width: 100%; min-width: 520px; font-size: 15px; }
+  th, td { text-align: left; padding: 11px 12px; border-bottom: 1px solid var(--line); vertical-align: top; }
+  th {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: .1em;
+    color: var(--ink-soft);
+  }
+
+  /* ---------- sources ---------- */
+  .sources { background: var(--bg-alt); }
+  .sources ol { font-size: 15px; line-height: 1.6; }
+  .sources li { margin-bottom: 14px; }
+  .tag {
+    display: inline-block;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: .08em;
+    text-transform: uppercase;
+    background: var(--stamp);
+    color: #fff;
+    border-radius: 3px;
+    padding: 2px 6px;
+    margin-right: 8px;
+    vertical-align: 2px;
+  }
+
+  /* ---------- real facts ---------- */
+  .real {
+    background: var(--bg-alt);
+    border-top: 3px solid var(--accent);
+  }
+  .real .card {
+    background: var(--paper);
+    border: 1px solid var(--line);
+    border-radius: 6px;
+    padding: 26px 24px;
+  }
+  .real dl { margin: 0; }
+  .real dt {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: .1em;
+    color: var(--ink-soft);
+    margin-top: 16px;
+  }
+  .real dd { margin: 4px 0 0; }
+
+  /* ---------- retro old-web block ---------- */
+  .retro { padding-top: 40px; }
+  .retro-box {
+    border: 3px ridge var(--accent-2);
+    background: var(--bg-alt);
+    padding: 22px 20px;
+    text-align: center;
+    font-family: "Courier New", Courier, monospace;
+    font-size: 14px;
+    line-height: 1.7;
+  }
+  .retro-title {
+    font-weight: 700;
+    letter-spacing: .05em;
+    color: var(--accent);
+    margin-bottom: 18px;
+  }
+  .counter {
+    display: inline-block;
+    background: #111;
+    color: #4ade80;
+    font-family: "Courier New", Courier, monospace;
+    font-size: 20px;
+    font-weight: 700;
+    letter-spacing: .1em;
+    padding: 4px 12px;
+    border: 2px inset #444;
+    margin-top: 6px;
+  }
+  .retro-small { font-size: 12px; color: var(--ink-soft); }
+
+  footer.end {
+    padding: 40px 0 60px;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+    font-size: 13px;
+    color: var(--ink-soft);
+    text-align: center;
+  }
+
+  @media (max-width: 520px) {
+    body { font-size: 17px; }
+    section { padding: 38px 0; }
+    .doc::after { font-size: 9px; padding: 4px 44px; right: -40px; }
+  }
+</style>
+
+<div class="banner">
+  <strong>⚠️ ЭТО САТИРА.</strong> Никола Тесла был сербом — родился в Смиляне (Австрийская империя),
+  сын православного священника. Всё ниже — выдумка ради шутки: «документы» нарисованы в HTML,
+  «источники» не существуют, «исследователи» тоже. Настоящие факты — <a href="#real">в конце страницы</a>.
+</div>
+
+<header class="hero">
+  <div class="wrap">
+    <p class="kicker">Независимое исследование · выпуск №0 · рецензировали трое, все дядя</p>
+    <h1>Никола Тесла был <em>армянином</em></h1>
+    <p class="dek">
+      Мы 11 минут изучали архивы, которых нет, и пришли к выводу, который нам сразу понравился.
+      Ниже — 9 неопровержимых доказательств, 4 поддельных документа и одна печать, поставленная картошкой.
+    </p>
+    <p class="byline">
+      Институт Лавашной Энергетики (основан вчера) · опубликовано 47 марта 1998 года
+      <span style="opacity:.7">(даты не существует, как и всего остального)</span> · читать 12 мин
+    </p>
+  </div>
+</header>
+
+<div class="wrap">
+
+<section>
+  <h2><span class="num">Тезис</span>Начнём с самого очевидного: с фамилии</h2>
+  <p>
+    «Тесла». Произнесите вслух. Медленно. Ещё медленнее. Слышите? Нет? Мы тоже не сразу
+    услышали, но потом услышали, и теперь не можем перестать.
+  </p>
+  <p>
+    Согласно нашей реконструкции, изначальная форма фамилии — <strong>«Тэс-Лаваш»</strong>
+    (буквально: «тот, кто смотрит на лаваш»). При переезде семьи в Австрийскую империю
+    писарь дошёл до второй половины фамилии, устал и поставил точку. Вторая половина
+    осталась в очереди и, по некоторым данным, стоит там до сих пор.<sup><a href="#s1">[1]</a></sup>
+  </p>
+  <blockquote>
+    «Фонетически переход <em>Тэс-Лаваш → Тесла</em> абсолютно закономерен, если очень хотеть.»
+    <footer>— проф. Г. А. Вымышленян, кафедра желаемого языкознания<sup><a href="#s2">[2]</a></sup></footer>
+  </blockquote>
+</section>
+
+<section>
+  <h2><span class="num">Доказательство I</span>Переменный ток изобретён из-за тонира</h2>
+  <p>
+    Официальная версия: Тесла открыл принцип вращающегося магнитного поля, гуляя по парку в
+    Будапеште в 1882 году. Наша версия: он пытался равномерно прогреть тонир, потому что лаваш
+    с одной стороны подгорал, а с другой оставался бледным.
+  </p>
+  <p>
+    Постоянный ток греет однобоко — это знает любой, кто хоть раз пёк лаваш на постоянном токе.
+    Нужно было, чтобы <em>жар вращался</em>. Так родилась идея вращающегося поля. Парк в Будапеште
+    в этой истории тоже есть, но он был по пути к рынку за мукой.<sup><a href="#s3">[3]</a></sup>
+  </p>
+
+  <div class="doc">
+    <div class="doc-head">Фонд 0 · Опись «где-то тут» · Лист, который мы не нашли</div>
+    <div class="doc-body">
+      <p>«…и сказал он: не идёт жар кругом, а идёт жар прямо, и потому тесто плачет.<br>
+      И взял он два магнита, и сделал так, чтобы жар пошёл кругом.<br>
+      И лаваш вышел ровный, и было ему хорошо.»</p>
+      <p>(далее лист оборван; предположительно там была схема, но, возможно, список покупок)</p>
+    </div>
+    <div class="doc-sig">
+      Заверено: печать поставлена картошкой (сорт неизвестен) · подпись отсутствует, потому что её не было
+    </div>
+  </div>
+</section>
+
+<section>
+  <h2><span class="num">Доказательство II</span>Катушка Тесла — это форма для гаты</h2>
+  <p>
+    Посмотрите на катушку Тесла. Теперь посмотрите на гату. Теперь снова на катушку.
+    Мы понимаем, что вы видите два совершенно разных предмета — но это потому, что вы смотрите
+    непредвзято, а так нельзя.
+  </p>
+  <p>
+    Спиральная намотка, концентрические слои, характерное расширение к основанию — всё это
+    <strong>ровно то же самое</strong>, что и в традиционной форме для выпечки, если разрешить себе
+    достаточную свободу интерпретации. Разряды на верхушке в оригинальной конструкции служили
+    для придания изделию хрустящей корочки.<sup><a href="#s4">[4]</a></sup>
+  </p>
+  <p>
+    Тот факт, что катушка Тесла не выпекает гату, наши эксперты объясняют утратой ключевого чертежа.
+    Чертёж утрачен настолько тщательно, что его никогда не существовало.
+  </p>
+</section>
+
+<section>
+  <h2><span class="num">Доказательство III</span>Уорденклиф: башня для передачи запаха шашлыка</h2>
+  <p>
+    Общепринято считать, что башня Уорденклиф (1901–1917) предназначалась для беспроводной
+    передачи энергии. Мы не спорим. Мы лишь уточняем, <em>какой именно</em> энергии.
+  </p>
+  <p>
+    В нашей реконструкции Тесла разрабатывал систему беспроводной трансляции запаха шашлыка на
+    расстояние до 300 км — так, чтобы вся семья, куда бы её ни разбросало, чувствовала, что во дворе
+    что-то начинается. Проект был закрыт, когда Дж. П. Морган спросил: «А где здесь счётчик?» —
+    и Тесла честно ответил: «Нигде, это же для своих».<sup><a href="#s5">[5]</a></sup>
+  </p>
+
+  <div class="doc">
+    <div class="doc-head">Смета · валюта не указана · сумма прописью не сходится с суммой цифрами</div>
+    <div class="doc-body">
+      <p>Уголь древесный, отборный ........................ 400<br>
+      Мясо (баранина; «нормальная, не как в прошлый раз») .... 1 200<br>
+      Лук ........................................................ 60<br>
+      Медный купол резонансный .......................... 18 000<br>
+      Ещё лук, потому что первого мало .................... 60<br>
+      Итого: <strong>«ну примерно столько»</strong></p>
+    </div>
+    <div class="doc-sig">
+      Утверждаю: подпись, похожая на подпись · дата: одна из · орфография сохранена, потому что её не было
+    </div>
+  </div>
+</section>
+
+<section>
+  <h2><span class="num">Доказательство IV</span>Он не женился. Вопросы?</h2>
+  <p>
+    Никола Тесла никогда не был женат. Мы предлагаем задуматься, что означает мужчина,
+    который до 86 лет отвечает «потом, я занят» — и сопоставить это с тем, как звучит
+    <em>его мама</em> в этой ситуации.
+  </p>
+  <p>
+    Историки объясняют его холостяцкую жизнь целибатом во имя науки. Мы объясняем её тем,
+    что ни одна кандидатка не прошла проверку.<sup><a href="#s6">[6]</a></sup>
+  </p>
+</section>
+
+<section>
+  <h2><span class="num">Родословная</span>Четыре поколения, восстановленные методом пристального смотрения</h2>
+  <p>
+    Ключевой вопрос любой теории такого рода — где именно в семье появляется нужная нам линия.
+    Мы подошли к этому системно: взяли документированную генеалогию семьи Тесла и двигались вверх
+    до первого предка, о котором известно достаточно мало, чтобы мы могли высказаться.
+  </p>
+
+  <h3>Отец: Милутин Тесла (1819–1879)</h3>
+  <p>
+    Священник Сербской православной церкви. Служил в Смиляне, писал статьи, знал наизусть длинные
+    тексты. Здесь наша теория испытывает первое затруднение: сохранились его проповеди, приход,
+    сан и переписка, и всё это — сербское. Мы честно искали армянский след и нашли только то, что
+    он, по свидетельствам, был очень строг к сыну по поводу учёбы. Мы решили, что этого достаточно.
+  </p>
+
+  <h3>Мать: Джука Мандич (1822–1892)</h3>
+  <p>
+    Дочь священника, неграмотная, с исключительной памятью — знала наизусть целые поэмы —
+    и сама конструировала бытовые приспособления, включая механическую взбивалку. Сам Тесла
+    считал, что изобретательский дар унаследовал от неё.
+  </p>
+  <p>
+    Мы полностью согласны с этим и лишь добавляем, что женщина, которая изобретает кухонные
+    устройства и держит в голове весь эпос, знакома каждому, у кого есть бабушка. Это, разумеется,
+    не доказывает ничего, кроме существования бабушек.<sup><a href="#s9">[9]</a></sup>
+  </p>
+
+  <h3>Деды: два Николы, ни одного нужного</h3>
+  <p>
+    Дед по отцу — тоже Никола Тесла, офицер. Дед по матери — Никола Мандич, священник.
+    Мы рассчитывали, что хотя бы один из них окажется удобно неизвестным, но оба
+    задокументированы. Это была тяжёлая для нас неделя.
+  </p>
+
+  <h3>Прадед: наконец-то никаких сведений</h3>
+  <p>
+    А вот дальше начинается территория, на которой мы чувствуем себя уверенно: сведений почти нет.
+    Именно здесь мы и разместили предка армянского происхождения — прибывшего в Лику, по нашей
+    версии, «примерно тогда же, когда и все остальные», с профессией «что-то делал руками»
+    и именем, которое мы пока не выбрали.
+  </p>
+  <p>
+    Отметим методологическую элегантность приёма: чем меньше о человеке известно, тем труднее
+    нас опровергнуть. В пределе, если о предке не известно вообще ничего, наша теория становится
+    неуязвимой — и абсолютно бессодержательной. Мы считаем это приемлемым компромиссом.
+  </p>
+  <blockquote>
+    «Родословную удобнее строить сверху вниз: сначала вывод, потом предки.»
+    <footer>— из нашего внутреннего регламента, пункт 1 (пункт 2 не понадобился)</footer>
+  </blockquote>
+</section>
+
+<section>
+  <h2><span class="num">Доказательство V</span>Генетика (мы старались)</h2>
+  <p>
+    Мы отправили образец в независимую лабораторию. Образец — прядь волос, которую мы нашли
+    в своей же расчёске, но, по нашему мнению, это не принципиально.
+  </p>
+  <div class="scroll">
+    <table>
+      <thead>
+        <tr><th>Маркер</th><th>Результат</th><th>Интерпретация</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>Армянский компонент</td><td>146%</td><td>Превышает допустимый предел; лаборатория просила больше так не делать</td></tr>
+        <tr><td>Сербский компонент</td><td>0.02%</td><td>Списываем на загрязнение образца сербским воздухом</td></tr>
+        <tr><td>Склонность к тостам длиннее 4 минут</td><td>Присутствует</td><td>Гомозигота</td></tr>
+        <tr><td>Ген «положи ещё, ты худой»</td><td>Активен</td><td>Экспрессируется в присутствии гостей</td></tr>
+        <tr><td>Непереносимость лактозы</td><td>Не проверяли</td><td>Не хотим знать</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p>
+    Сумма компонентов составляет 146.04%, что, как честно указано в отчёте, «математически невозможно,
+    но эмоционально убедительно».<sup><a href="#s7">[7]</a></sup>
+  </p>
+</section>
+
+<section>
+  <h2><span class="num">Доказательство VI</span>Хронология, восстановленная по обрывкам того, что нам удобно</h2>
+  <div class="scroll">
+    <table>
+      <thead>
+        <tr><th>Год</th><th>Официально</th><th>По нашим данным</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>1856</td><td>Родился в Смиляне</td><td>Родился в Смиляне, но с армянским выражением лица</td></tr>
+        <tr><td>1875</td><td>Поступил в Политехникум в Граце</td><td>Поступил, потому что «врачом не захотел, а надо было кем-то»</td></tr>
+        <tr><td>1882</td><td>Идея вращающегося магнитного поля</td><td>Инцидент с тониром (см. Доказательство I)</td></tr>
+        <tr><td>1884</td><td>Приехал в Нью-Йорк с 4 центами</td><td>Приехал с 4 центами и тремя кг сыра в чемодане</td></tr>
+        <tr><td>1891</td><td>Запатентовал катушку Тесла</td><td>Запатентовал форму для гаты, патентный клерк не понял</td></tr>
+        <tr><td>1901</td><td>Начал строить Уорденклиф</td><td>Начал строить шашлычную вертикального типа</td></tr>
+        <tr><td>1943</td><td>Умер в отеле «Нью-Йоркер»</td><td>Умер, так и не позвонив маме в тот вечер, о чём мы не будем</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<section>
+  <h2><span class="num">Доказательство VII</span>Свидетельство о рождении, которое мы нарисовали сами</h2>
+  <div class="doc">
+    <div class="doc-head">Метрическая выпись · шрифт: какой был · бумага: нет</div>
+    <div class="doc-body">
+      <p><strong>ИМЯ:</strong> Никола<br>
+      <strong>ФАМИЛИЯ:</strong> Тэс-Лаваш <span style="opacity:.6">(вторая часть зачёркнута кем-то усталым)</span><br>
+      <strong>ДАТА:</strong> 10 июля 1856 <span style="opacity:.6">(в этой части мы решили не врать)</span><br>
+      <strong>МЕСТО:</strong> Смилян <span style="opacity:.6">(здесь тоже, к сожалению для нас)</span><br>
+      <strong>ОТЕЦ:</strong> Милутин, священник <span style="opacity:.6">(православный; это, признаём, мешает нашей версии)</span><br>
+      <strong>МАТЬ:</strong> Джука <span style="opacity:.6">(изобретала бытовые приспособления — вот это как раз правда)</span><br>
+      <strong>НАЦИОНАЛЬНОСТЬ:</strong> <span style="opacity:.6">графа заполнена нами, задним числом, фломастером</span></p>
+    </div>
+    <div class="doc-sig">
+      Подлинность: нулевая · экспертиза: не проводилась · доверие: пожалуйста, не надо
+    </div>
+  </div>
+  <p>
+    Как видите, документ на 80% состоит из настоящих фактов и на 20% из фломастера.
+    Именно так и работают подделки — и именно поэтому мы поставили на этой странице большую
+    жёлтую плашку сверху.
+  </p>
+</section>
+
+<section>
+  <h2><span class="num">Доказательство VIII</span>Аргумент «а как ещё объяснить»</h2>
+  <p>
+    Мы вынуждены признать: прямых доказательств у нас ноль. Но обратите внимание на структуру
+    нашего рассуждения — она безупречна:
+  </p>
+  <ol>
+    <li>Тесла был гениален.</li>
+    <li>Мы тоже знаем одного гениального человека, и он армянин.</li>
+    <li>Совпадение? Мы не думаем, потому что это утомительно.</li>
+  </ol>
+  <p>
+    Отдельно отметим: любые возражения лишь подтверждают нашу правоту, поскольку показывают,
+    <em>насколько кому-то нужно</em>, чтобы правда не вышла наружу. Этот приём называется
+    «нефальсифицируемость» и является нашим главным методологическим инструментом.
+  </p>
+</section>
+
+<section>
+  <h2><span class="num">Доказательство IX</span>Устная традиция</h2>
+  <blockquote>
+    «Ну а как иначе?»
+    <footer>— бабушка, 2019, на вопрос, был ли Тесла армянином. Больше вопросов не последовало.<sup><a href="#s8">[8]</a></sup></footer>
+  </blockquote>
+  <p>
+    В нашей методологии этот источник обладает наивысшим весом, поскольку спорить с ним
+    никто из авторов не решился.
+  </p>
+</section>
+
+<section>
+  <h2><span class="num">Раздел возражений</span>А что говорят настоящие историки?</h2>
+  <p>
+    Что он серб. Что он сам называл себя сербом. Что он говорил о себе как о человеке, который
+    гордится сербским происхождением и хорватской родиной. Что его отец был священником Сербской
+    православной церкви. Что в его дневниках, письмах, патентах и автобиографии нет ни лаваша,
+    ни тонира, ни гаты.
+  </p>
+  <p>
+    Мы ознакомились с этими доводами и признаём: они правы, а мы нет. Но у нас уже был свёрстан
+    лендинг.
+  </p>
+</section>
+
+<section>
+  <h2><span class="num">Доказательство X</span>Австрийский архив, которого мы не запрашивали</h2>
+  <p>
+    Отдельного упоминания заслуживает жанр «венская архивная справка XIX века». Он работает
+    безотказно: готический бланк, номер дела через дробь, круглая печать, подпись чиновника —
+    и читатель верит раньше, чем дочитывает.
+  </p>
+  <p>
+    Поэтому наш вариант мы нарисовали прямо в браузере, а не состарили в фоторедакторе. Обратите
+    внимание: ведомство в шапке — выдуманное, адресат — выдуманный, номер дела — символ «пустое
+    множество», а подпись принадлежит человеку по фамилии Niemand («никто»).
+  </p>
+
+  <div class="doc">
+    <div class="doc-head">K. K. Hof-Archiv für Erwünschte Abstammungen · Wien · Bestand: keiner</div>
+    <div class="doc-body">
+      <p><strong>Zahl:</strong> Geneal. ∅ / ∅ &nbsp;·&nbsp; <strong>Beilage:</strong> keine, es gab nie eine</p>
+      <p><strong>An:</strong> Herrn Dr. Niemand von Nirgendwo, k. k. Nichtsrath, Wien</p>
+      <p><strong>Betreff:</strong> Notiz über einen Vorfahren angenehmer Herkunft</p>
+      <p>
+        In den hier nicht vorhandenen Akten fand sich unter den Collectaneen für auswärtige
+        Wünsche folgende Notiz, welche für den genealogischen Eigenbedarf von Interesse ist:
+      </p>
+      <p>
+        «Stepan Tesla, Militärgrenz-Offizier, geboren zu Smiljan (Lika) im Jahre 1756 oder in
+        einem anderen, diente im III. Regimente, backte dort angeblich vorzüglich, und erhielt
+        1789 das Prädikat <strong>“Edler von Lavasch”</strong>. Das Prädikat wurde ihm 1790
+        wieder entzogen, da niemand wusste, was es bedeutet.»
+      </p>
+      <p>(cf. Collect. Arm. Fasc. ∅, Nr. — der Faszikel existiert nicht)</p>
+    </div>
+    <div class="doc-sig">
+      Mit vorzüglicher Hochachtung, Der Archivbeamte: <em>J. Niemand</em><br>
+      Siegel: mit einer Kartoffel gestempelt · Papier: keines, dies ist HTML
+    </div>
+  </div>
+
+  <p>
+    Настоящий венский Haus-, Hof- und Staatsarchiv существует, работает и хранит подлинные
+    документы Габсбургской монархии. К этой странице он отношения не имеет и ничего подобного
+    про семью Тесла не сообщал.
+  </p>
+</section>
+
+<section class="sources">
+  <h2><span class="num">Источники</span>Ни одного настоящего</h2>
+  <p>
+    Все ссылки ниже выдуманы намеренно и оформлены так, чтобы их нельзя было принять за настоящие.
+    Если вам нужен настоящий источник о Тесле — берите его автобиографию «My Inventions» (1919)
+    или каталог музея Николы Теслы в Белграде.
+  </p>
+  <ol>
+    <li id="s1"><span class="tag">выдумка</span>Вымышленян Г. А. «Очередь как исторический фактор: куда девалась вторая половина фамилии». — Вестник Лавашной Энергетики, том 0, выпуск −3, стр. 404 (журнал ещё не основан).</li>
+    <li id="s2"><span class="tag">выдумка</span>Кафедра желаемого языкознания. Стенограмма заседания, на котором все согласились заранее. — Не издавалось, не записывалось, не происходило.</li>
+    <li id="s3"><span class="tag">выдумка</span>«Тонир и вращающееся поле: препринт, который мы не стали писать». — Архив, который мы забыли завести, фонд 0, опись «где-то тут», лист отсутствует.</li>
+    <li id="s4"><span class="tag">выдумка</span>Сравнительная кондитерская электротехника. Т. 1: Спирали. — Издательство «Мы Сами», тираж 0 экз., переплёт воображаемый.</li>
+    <li id="s5"><span class="tag">выдумка</span>Протокол беседы Теслы и Дж. П. Моргана, восстановленный по интонации. — Собрание сочинений, которого нет, стр. между двумя другими стр.</li>
+    <li id="s6"><span class="tag">выдумка</span>«Список кандидаток, не прошедших проверку». Рукопись утрачена в момент, когда мы про неё придумали.</li>
+    <li id="s7"><span class="tag">выдумка</span>Отчёт независимой лаборатории «ДНК и Пожелания», заказ №∅. Пометка лаборатории: «сумма процентов больше ста, мы предупреждали».</li>
+    <li id="s8"><span class="tag">выдумка</span>Бабушка. Личное сообщение, кухня, вечер. Цитируется по памяти, с поправкой на то, что переспросить было страшно.</li>
+    <li id="s9"><span class="tag">выдумка</span>«Бабушка как единица измерения: к вопросу о методологии». — Сборник, который мы анонсировали и не выпустили, стр. 1 из 1.</li>
+    <li><span class="tag">выдумка</span>Приложение: печать, поставленная картошкой. Картошка съедена, воспроизводимость эксперимента утрачена.</li>
+  </ol>
+</section>
+
+<section class="real" id="real">
+  <h2><span class="num">Без шуток</span>Настоящие факты о Николе Тесле</h2>
+  <div class="card">
+    <dl>
+      <dt>Происхождение</dt>
+      <dd>Серб. Родился в семье сербов в Австрийской империи; отец Милутин Тесла — священник Сербской православной церкви, мать Джука Мандич — сама придумывала бытовые приспособления.</dd>
+
+      <dt>Родился</dt>
+      <dd>10 июля 1856 года, село Смилян, Лика (тогда Австрийская империя, сегодня Хорватия).</dd>
+
+      <dt>Образование</dt>
+      <dd>Реальная гимназия в Карловаце, затем Политехникум в Граце и учёба в Праге.</dd>
+
+      <dt>Путь</dt>
+      <dd>Работал в телефонной компании в Будапеште, затем в Continental Edison в Париже; в 1884 году приехал в Нью-Йорк. С 1891 года — гражданин США.</dd>
+
+      <dt>Главное в науке</dt>
+      <dd>Вращающееся магнитное поле и многофазные системы переменного тока, асинхронный двигатель, резонансный трансформатор («катушка Тесла»), работы по радио и беспроводной передаче энергии. Единица магнитной индукции в СИ — тесла — названа в его честь.</dd>
+
+      <dt>Уорденклиф</dt>
+      <dd>Реальная башня на Лонг-Айленде (1901–1917) для беспроводной передачи сигналов и энергии. Проект действительно остался без финансирования Дж. П. Моргана и не был завершён. Шашлык здесь ни при чём.</dd>
+
+      <dt>Умер</dt>
+      <dd>7 января 1943 года в отеле «Нью-Йоркер», Манхэттен. Похоронен — прах хранится в Музее Николы Теслы в Белграде.</dd>
+
+      <dt>Где читать по-настоящему</dt>
+      <dd>Автобиография «My Inventions» (1919); собрание Музея Николы Теслы (Белград); биография W. Bernard Carlson, «Tesla: Inventor of the Electrical Age» (Princeton University Press, 2013).</dd>
+    </dl>
+  </div>
+</section>
+
+<section class="retro">
+  <div class="retro-box">
+    <p class="retro-title">◄◄ ДОБРО ПОЖАЛОВАТЬ НА МОЮ ДОМАШНЮЮ СТРАНИЦУ ►►</p>
+    <p>
+      Вы посетитель номер
+      <span class="counter">0&nbsp;0&nbsp;0&nbsp;0&nbsp;4&nbsp;1</span><br>
+      <span class="retro-small">(счётчик сломан с 47 марта 1998 года и показывает 41 всем)</span>
+    </p>
+    <p class="retro-small">
+      Последнее обновление: никогда · Оптимизировано под Netscape Navigator 4.0 и разрешение 800×600<br>
+      Эта страница является частью веб-кольца «Гении, которые на самом деле наши» (участников: 1)<br>
+      Для просмотра анимированного лаваша включите поддержку GIF
+    </p>
+    <p class="retro-small" style="margin-bottom:0">
+      Подписывайтесь на нашу рассылку — форма подписки не работает, потому что её нет
+    </p>
+  </div>
+</section>
+
+<footer class="end">
+  <p>
+    Сатирическая страница. Все «документы», «источники», «эксперты», «лаборатории» и даты выше
+    выдуманы и помечены как выдуманные. Никола Тесла — реальный человек и был сербом.
+  </p>
+  <p>Сделано ради шутки. Пожалуйста, не цитируйте это как факт.</p>
+</footer>
+
+</div>
